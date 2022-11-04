@@ -2,3 +2,6 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
+
+# так как мы будем пользоваться Slim микро фреймворком и стоит сервер Apache, то создаём этот файл
+# в котором размещаем правило, что бы все входящие запросы мы переводили на файл index.php

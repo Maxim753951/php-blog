@@ -1,7 +1,7 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+RewriteEngine On # включаем АпачиМод, который называется МодРеврайт, в разверезе слудующих правил:
+RewriteCond %{REQUEST_FILENAME} !-f # если просим несуществующий файл
+RewriteCond %{REQUEST_FILENAME} !-d # или несуществующую директорию
+RewriteRule ^ index.php [QSA,L] # все такие запросы пересылать на index.php
 
 # так как мы будем пользоваться Slim микро фреймворком и стоит сервер Apache, то создаём этот файл
 # в котором размещаем правило, что бы все входящие запросы мы переводили на файл index.php

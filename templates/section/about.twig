@@ -1,4 +1,17 @@
 <div class="container">
-    <h4>About</h4>
-    <p>Hello, my name is Maxim. I am a web developer</p>
+
+    <h4>Options</h4>
+    <!--p>Hello, my name is Maxim. I am a web developer</p-->
+
+    {% if user is not null %}
+        <p>Hello, {{ user.username|escape }} ({{ user.email|escape }})</p>
+        {% if user.role_id == 1 %}
+            <a class="btn btn-outline-success me-2" type="button" href="{{ url('create') }}">Create post</a>
+        {% else %}
+            <p>You are not Admin!</p>
+        {% endif %}
+    {% else %}
+        <p>You are not logged in!</p>
+    {% endif %}
+
 </div>

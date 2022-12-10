@@ -1,0 +1,51 @@
+{% extends'parts/base.twig' %}
+
+{% block body %}
+    <h1>Create Form</h1>
+
+    {% if message is not null %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+    <form method="post" action="{{ url('create-post') }}">
+        <div class="form-group mb-2">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" id="title" value="{{ form ? form.title }}"/>
+        </div>
+        <div class="form-group mb-2">
+            <label for="url_key">Url_key</label>
+            <span class="input-group-text" id="basic-addon3">http://php-blog/</span>
+            <input type="text" name="url_key" class="form-control" id="url_key" aria-describedby="emailHelp" value="{{ form ? form.url_key }}"/>
+            <small id="url_keyHelp" class="form-text text-muted">What will be in the address bar.</small>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" class="form-control" id="subject"/>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="image_path">Image_path</label>
+            <span class="input-group-text" id="basic-addon3">W:\domains\php-blog\</span>
+            <input type="text" name="image_path" class="form-control" id="image_path"/>
+            <small id="url_keyHelp" class="form-text text-muted">What will be in the path for the picture.</small>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="content">Content</label>
+            <textarea name="content" class="form-control" aria-label="With textarea" id="content" rows="3"></textarea>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="description">Description</label>
+            <input type="text" name="description" class="form-control" id="description"/>
+        </div>
+        <div class="form-group mb-2">
+            <label for="published_date">Published_date (Y.M.D)</label>
+            <input type="text" name="published_date" class="form-control" id="published_date"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+{% endblock %}

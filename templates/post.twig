@@ -1,11 +1,11 @@
-{% extends 'base.twig' %}
+{% extends'parts/base.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mb-3 p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
         {% if post.image_path is not null %}
         <img src="{{ asset_url(post.image_path) }}" class="img-fluid" alt="{{ post.title|escape }}">
         {% endif %}
-        <!--h1>Post URL: {{ url_key }}</h1-->
+        <!--h1>Post URL: { { url_key } }</h1-->
         <h1 class="mt-3 mb-3">{{ post.title|escape }}</h1>  <!--|escape экранирование от лишних выполнений js-->
         <div class="container mb-3">
         <div class="row">
@@ -14,6 +14,74 @@
         </div>
         <div>
             {{ post.content|raw }} <!--нет экранирования для сохранения потенциально имеющейся вёрстки html-->
+        </div>
+    </div>
+    {% if user is not null %}
+        {% if user.role_id == 1 %}
+            <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                <form method="post" action="{{ url('delete-post') }}">
+                    <input type="text" name="url_key" class="form-control d-none" id="url_key" value="{{ post.url_key }}"/>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+                </div>
+                <div class="col-sm">
+                <form method="post" action="{{ url('change-post') }}">
+                    <input type="text" name="url_key" class="form-control d-none" id="url_key" value="{{ post.url_key }}"/>
+                    <button type="submit" class="btn btn-primary">Change</button>
+                </form>
+                </div>
+            </div>
+            </div>
+        {% else %}
+        {% endif %}
+    {% else %}
+    {% endif %}
+
+    <div>
+        <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger">
+            Comments
+        </div>
+        {% if user is not null %}
+        <div class="mb-3">
+            <h5>Add:</h5>
+            {% if message is not null %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            <form method="post" action="{{ url('comment-post') }}">
+
+                <div class="input-group mb-2">
+                    <span for="content" class="input-group-text">Content</span>
+                    <textarea name="content" class="form-control" aria-label="With textarea" id="content"></textarea>
+                </div>
+
+                <input type="text" name="user_id" class="form-control d-none" id="user_id" value="{{ user.user_id }}"/>
+                <input type="text" name="post_id" class="form-control d-none" id="post_id" value="{{ post.post_id }}"/>
+                <input type="text" name="url_key" class="form-control d-none" id="url_key" value="{{ post.url_key }}"/>
+
+                <div class="mb-2">
+                    <input class="form-control" type="file" id="formFileDisabled" disabled>
+                </div>
+
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Add</button>
+            </form>
+        </div>
+        {% else %}
+            <p>You are not logged in to add comments to the post!</p>
+        {% endif %}
+        <div>
+            <h5>All:</h5>
+            {% for comment in comments %}
+                    <div class="mb-2">
+                        <div>
+                            <!--p class="mt-2">Author: { { user.username|escape } }</p-->
+                            <p class="mt-2">Text: {{ comment.content|escape }}</p>
+                        </div>
+                    </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

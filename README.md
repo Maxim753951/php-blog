@@ -1,4 +1,4 @@
-# php-blog
+# php-blog 1.0
 
 PHP, MySQL
 

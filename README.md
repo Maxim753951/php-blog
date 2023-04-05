@@ -2,4 +2,4 @@
 
 PHP, MySQL, (Twig, Slim, PDO)
 
-Add later: post edit, post search, user manager.
+Add later: post edit, post search, user manager

@@ -1,4 +1,4 @@
-# php-blog 1.0
+# php-blog (Beta 1.0)
 
 PHP, MySQL, (Twig, Slim, PDO)
 
